@@ -12,6 +12,6 @@
 @media (min-width: 576px) {
   .Sidebar {
     width: 320px;
-    overflow: hidden;
+    overflow: auto;
   }
 }
