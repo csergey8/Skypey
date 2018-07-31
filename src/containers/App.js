@@ -8,7 +8,6 @@ import './App.css';
 class App extends Component {
   render() {
     const { contacts, user, activeUserId } = store.getState();
-    console.log(contacts.contacts);
     return (
       <div className="App">
         <Sidebar contacts={_.values(contacts.contacts)} />

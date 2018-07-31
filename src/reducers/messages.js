@@ -1,5 +1,5 @@
 import { getMessages } from '../static-data';
-import { SEND_MESSAGE } from '../actions/constants/action-types';
+import { SEND_MESSAGE, DELETE_MESSAGE } from '../actions/constants/action-types';
 import _ from 'lodash';
 import user from './user';
 
@@ -20,6 +20,18 @@ export default function messages(state = getMessages(10), action) {
           }
         }
       };
+      case DELETE_MESSAGE:
+      const { id, num } = action.payload;
+      const userMsg = state[id];
+      console.log(state, id);
+      delete userMsg[num];
+      console.log(userMsg);
+        return {
+          ...state,
+          [id]: {
+            ...userMsg
+          }
+        }
     default: 
       return state;
   }

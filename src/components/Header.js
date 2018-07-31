@@ -2,6 +2,7 @@ import React from 'react';
 import "./Header.css";
 
 const Header = ({ user }) => {
+  console.log(user)
   const { name, status } = user;
   return (
     <header className="Header">
