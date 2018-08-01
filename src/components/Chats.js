@@ -58,9 +58,7 @@ class Chats extends Component {
   }
   componentWillReceiveProps() {
     this.forceUpdate();
-    this.setState(this.state)
-    console.log('RECIEVE');
-    console.log(this.props.messages);
+    this.setState(this.state);
   }
   componentDidMount() {
     this.scrollToBottom();
@@ -72,7 +70,6 @@ class Chats extends Component {
     this.chatsRef.current.scrollTop = this.chatsRef.current.scrollHeight;
   }
   render() {
-    console.log('RENDEr');
     return (
       <div className="Chats" ref={this.chatsRef}>
         {this.props.messages.map(message => (

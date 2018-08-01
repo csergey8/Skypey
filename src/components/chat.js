@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import store from '../store';
-import { deleteMessage } from '../actions/index';
+import { deleteMessage, startEditMessage } from '../actions/index';
 
 class Chat extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class Chat extends Component {
       number: this.props.message.number
     }
     this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
-    console.log(props);
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -25,7 +24,6 @@ class Chat extends Component {
       userId: nextProps.user.user_id,
       number: nextProps.message.number
     });
-    console.log(nextProps.message); 
   }
   handleDeleteBtn() {
     if(this.is_user_msg) {
@@ -34,9 +32,14 @@ class Chat extends Component {
     });
   }
   }
-  handleDeleteMsg = () => {
-    console.log(this.state);
+  handleDeleteMsg = (e) => {
+    e.stopPropagation();
     store.dispatch(deleteMessage(this.state.userId, this.state.number));
+  }
+
+  handleEditMsg = () => {
+    console.log(this.state.number, this.state.userId, this.state.text);
+    store.dispatch(startEditMessage(this.state.number, this.state.userId, this.state.text));
   }
 
   render() {
@@ -45,6 +48,7 @@ class Chat extends Component {
        className={`Chat ${this.is_user_msg ? "is_user_msg" : ""}`}
        onMouseEnter={this.handleDeleteBtn}
        onMouseLeave={this.handleDeleteBtn}
+       onClick={this.handleEditMsg}
       >
       {this.state.text}
       { this.state.showDelete && <button onClick={this.handleDeleteMsg}>X</button>}
